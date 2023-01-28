@@ -1,9 +1,15 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
+from routers import products, users
 
 app = FastAPI()
 
-@app.get("/")
-async def url():
-    return {"mensaje":"Hello World"}
+# Routers
+app.include_router(products.router)
+app.include_router(users.router)
 
-#hello mundo 
+@app.get("/")
+async def root():
+    return "Hello World"
+
+
+
